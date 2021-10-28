@@ -52,9 +52,14 @@ namespace processor
         }
 
         #region RAM
-        private void ReadRam(int address, string value)
+        /// <summary>
+        /// Returns data as integers hold in addressed memory cell
+        /// </summary>
+        /// <param name="address"></param>
+        /// <returns></returns>
+        private int ReadRam(int address)
         {
-
+            
         }
 
         private void WriteRam(int address, string hexValue)
@@ -63,11 +68,19 @@ namespace processor
         }
         #endregion
 
-        private string CnvRespectfully(string value)
-        {
-            if (radHex.Checked is true) return value.Hex2Int().ToHex2();
-            else throw new NotImplementedException();
-        }
+        /// <summary>
+        /// Converts integer to hexadecimal or binary representation in text according to selected view mode
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private string CnvRespectfully(int value) => radHex.Checked ? Convert.ToString(value, 16).PadLeft(2, '0') : Convert.ToString(value, 2).PadLeft(8, '0');
+
+        /// <summary>
+        /// Converts hexadecimal or binary representation to integer according to selected view mode
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private int CnvRespectfully(string value) => radHex.Checked ? Convert.ToInt32(value, 16) : Convert.ToInt32(value, 2);
 
         /// <summary>
         /// Parses and loads instructions to ramList
@@ -76,7 +89,7 @@ namespace processor
         /// <param name="e"></param>
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            List<string> instructionList = new List<string>();
+            List<string> instructionList = new();
 
             if (!string.IsNullOrWhiteSpace(txtCode.Text))
             {
@@ -88,16 +101,13 @@ namespace processor
             if (radHex.Checked is true)
             {
                 instructionList = (from x in instructionList select RemoveLeading(x)).ToList();
-                List<string> inst = new();
+                int j = 0;
                 for (int i = 0; i < instructionList.Count; i++)
                 {
-                    IEnumerable<string> enm = instructionList[i].Split2();
-                    inst.Add(enm.ElementAt(0));
-                    inst.Add(enm.ElementAt(1)); // i am quite sure that there is a much better approach but it's 1 am and i'm tired af
-                }
-                for (int i = 0; i < inst.Count; i++)
-                {
-                    WriteRam(i, inst[i]);
+                    string[] enm = instructionList[i].Split2().ToArray();
+                    WriteRam(j, enm[0]);
+                    WriteRam(j+1, enm[1]);
+                    j += 2;
                 }
             }
             else
@@ -107,5 +117,10 @@ namespace processor
         }
 
         private void btnClear_Click(object sender, EventArgs e) => InitializeRamList();
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
