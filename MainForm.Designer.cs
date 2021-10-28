@@ -31,6 +31,8 @@ namespace processor
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.radHex = new System.Windows.Forms.RadioButton();
+            this.radBin = new System.Windows.Forms.RadioButton();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnLoad = new System.Windows.Forms.Button();
             this.txtCode = new System.Windows.Forms.RichTextBox();
@@ -84,8 +86,6 @@ namespace processor
             this.txtr6 = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.ramList = new System.Windows.Forms.ListBox();
-            this.radBin = new System.Windows.Forms.RadioButton();
-            this.radHex = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -141,6 +141,29 @@ namespace processor
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Input";
             // 
+            // radHex
+            // 
+            this.radHex.AutoSize = true;
+            this.radHex.Checked = true;
+            this.radHex.Location = new System.Drawing.Point(70, 318);
+            this.radHex.Name = "radHex";
+            this.radHex.Size = new System.Drawing.Size(94, 19);
+            this.radHex.TabIndex = 10;
+            this.radHex.TabStop = true;
+            this.radHex.Text = "Hexadecimal";
+            this.radHex.UseVisualStyleBackColor = true;
+            // 
+            // radBin
+            // 
+            this.radBin.AutoSize = true;
+            this.radBin.Location = new System.Drawing.Point(6, 318);
+            this.radBin.Name = "radBin";
+            this.radBin.Size = new System.Drawing.Size(58, 19);
+            this.radBin.TabIndex = 9;
+            this.radBin.TabStop = true;
+            this.radBin.Text = "Binary";
+            this.radBin.UseVisualStyleBackColor = true;
+            // 
             // btnClear
             // 
             this.btnClear.Location = new System.Drawing.Point(187, 316);
@@ -149,6 +172,7 @@ namespace processor
             this.btnClear.TabIndex = 8;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnLoad
             // 
@@ -158,6 +182,7 @@ namespace processor
             this.btnLoad.TabIndex = 7;
             this.btnLoad.Text = "Load";
             this.btnLoad.UseVisualStyleBackColor = true;
+            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
             // txtCode
             // 
@@ -691,28 +716,6 @@ namespace processor
             this.ramList.Name = "ramList";
             this.ramList.Size = new System.Drawing.Size(199, 428);
             this.ramList.TabIndex = 0;
-            // 
-            // radBin
-            // 
-            this.radBin.AutoSize = true;
-            this.radBin.Location = new System.Drawing.Point(6, 318);
-            this.radBin.Name = "radBin";
-            this.radBin.Size = new System.Drawing.Size(58, 19);
-            this.radBin.TabIndex = 9;
-            this.radBin.TabStop = true;
-            this.radBin.Text = "Binary";
-            this.radBin.UseVisualStyleBackColor = true;
-            // 
-            // radHex
-            // 
-            this.radHex.AutoSize = true;
-            this.radHex.Location = new System.Drawing.Point(70, 318);
-            this.radHex.Name = "radHex";
-            this.radHex.Size = new System.Drawing.Size(94, 19);
-            this.radHex.TabIndex = 10;
-            this.radHex.TabStop = true;
-            this.radHex.Text = "Hexadecimal";
-            this.radHex.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
