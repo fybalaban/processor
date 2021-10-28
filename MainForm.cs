@@ -19,13 +19,36 @@ namespace processor
         private void MainForm_Load(object sender, EventArgs e)
         {
             InitializeRamList();
+            InitializeCpu();
         }
 
         private void InitializeRamList()
         {
             ramList.Items.Clear();
-            for (int i = 0; i < 256; i++)
-                ramList.Items.Add(string.Format("{0}: {1}", Convert.ToString(i, 16).PadLeft(2, '0'), "00"));
+            if (radHex.Checked is true)
+                for (int i = 0; i < 256; i++)
+                    ramList.Items.Add(string.Format("{0}: {1}", Convert.ToString(i, 16).PadLeft(2, '0').ToUpper(), "00"));
+            else
+                for (int i = 0; i < 256; i++)
+                    ramList.Items.Add(string.Format("{0}: {1}", Convert.ToString(i, 2).PadLeft(8, '0'), "00000000"));
+        }
+
+        private void InitializeCpu()
+        {
+            if (radHex.Checked is true)
+            {
+                txtrInstReg.Text = "00";
+                txtProgCounter.Text = "00";
+                for (int i = 0; i < 16; i++)
+                    Controls.Find($"txtr{i:x}", true)[0].Text = "00";
+            }
+            else
+            {
+                txtrInstReg.Text = "00000000";
+                txtProgCounter.Text = "00000000";
+                for (int i = 0; i < 16; i++)
+                    Controls.Find($"txtr{i:x}", true)[0].Text = "00000000";
+            }
         }
 
         #region RAM
