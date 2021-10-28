@@ -84,6 +84,8 @@ namespace processor
             this.txtr6 = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.ramList = new System.Windows.Forms.ListBox();
+            this.radBin = new System.Windows.Forms.RadioButton();
+            this.radHex = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -125,6 +127,8 @@ namespace processor
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.radHex);
+            this.groupBox2.Controls.Add(this.radBin);
             this.groupBox2.Controls.Add(this.btnClear);
             this.groupBox2.Controls.Add(this.btnLoad);
             this.groupBox2.Controls.Add(this.txtCode);
@@ -688,6 +692,28 @@ namespace processor
             this.ramList.Size = new System.Drawing.Size(199, 428);
             this.ramList.TabIndex = 0;
             // 
+            // radBin
+            // 
+            this.radBin.AutoSize = true;
+            this.radBin.Location = new System.Drawing.Point(6, 318);
+            this.radBin.Name = "radBin";
+            this.radBin.Size = new System.Drawing.Size(58, 19);
+            this.radBin.TabIndex = 9;
+            this.radBin.TabStop = true;
+            this.radBin.Text = "Binary";
+            this.radBin.UseVisualStyleBackColor = true;
+            // 
+            // radHex
+            // 
+            this.radHex.AutoSize = true;
+            this.radHex.Location = new System.Drawing.Point(70, 318);
+            this.radHex.Name = "radHex";
+            this.radHex.Size = new System.Drawing.Size(94, 19);
+            this.radHex.TabIndex = 10;
+            this.radHex.TabStop = true;
+            this.radHex.Text = "Hexadecimal";
+            this.radHex.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -706,6 +732,7 @@ namespace processor
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.splitContainer2.Panel1.ResumeLayout(false);
@@ -783,6 +810,8 @@ namespace processor
         private System.Windows.Forms.RichTextBox txtCode;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.RadioButton radHex;
+        private System.Windows.Forms.RadioButton radBin;
     }
 }
 
