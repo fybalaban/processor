@@ -57,15 +57,21 @@ namespace processor
         /// </summary>
         /// <param name="address"></param>
         /// <returns></returns>
-        private int ReadRam(int address)
-        {
-            
-        }
+        private int ReadRam(int address) => CnvRespectfully(ramList.Items[address].ToString().Split(':', StringSplitOptions.TrimEntries)[1]);
 
-        private void WriteRam(int address, string hexValue)
-        {
-            ramList.Items[address] = string.Format("{0}: {1}", CnvRespectfully(address.ToString()), hexValue);
-        }
+        /// <summary>
+        /// Used by loader for writing hexadecimal/binary instructions
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="hexValue"></param>
+        private void LoadProgram(int address, string value) => ramList.Items[address] = $"{CnvRespectfully(address)}: {value}";
+
+        /// <summary>
+        /// Write data to addressed memory cell
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="value"></param>
+        private void WriteRam(int address, int value) => ramList.Items[address] = $"{CnvRespectfully(address)}: {CnvRespectfully(value)}";
         #endregion
 
         /// <summary>
@@ -73,7 +79,7 @@ namespace processor
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        private string CnvRespectfully(int value) => radHex.Checked ? Convert.ToString(value, 16).PadLeft(2, '0') : Convert.ToString(value, 2).PadLeft(8, '0');
+        private string CnvRespectfully(int value) => radHex.Checked ? Convert.ToString(value, 16).PadLeft(2, '0').ToUpper() : Convert.ToString(value, 2).PadLeft(8, '0');
 
         /// <summary>
         /// Converts hexadecimal or binary representation to integer according to selected view mode
@@ -105,8 +111,8 @@ namespace processor
                 for (int i = 0; i < instructionList.Count; i++)
                 {
                     string[] enm = instructionList[i].Split2().ToArray();
-                    WriteRam(j, enm[0]);
-                    WriteRam(j+1, enm[1]);
+                    LoadProgram(j, enm[0]);
+                    LoadProgram(j+1, enm[1]);
                     j += 2;
                 }
             }
