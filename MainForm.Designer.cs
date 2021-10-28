@@ -31,30 +31,36 @@ namespace processor
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnStep = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnLoad = new System.Windows.Forms.Button();
+            this.txtCode = new System.Windows.Forms.RichTextBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.lblStatus = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
+            this.btnStep = new System.Windows.Forms.Button();
             this.btnHalt = new System.Windows.Forms.Button();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.lblOpcode = new System.Windows.Forms.Label();
             this.lblOpcodeDesc = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label13 = new System.Windows.Forms.Label();
+            this._lblrc = new System.Windows.Forms.Label();
             this.txtrf = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
+            this._lblrf = new System.Windows.Forms.Label();
             this.txtr8 = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
+            this._lblre = new System.Windows.Forms.Label();
             this.txtr9 = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
+            this._lblrd = new System.Windows.Forms.Label();
             this.txtra = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
+            this._lblrb = new System.Windows.Forms.Label();
             this.txtrb = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
+            this._lblra = new System.Windows.Forms.Label();
             this.txtrc = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
+            this._lblr9 = new System.Windows.Forms.Label();
             this.txtrd = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
+            this._lblr8 = new System.Windows.Forms.Label();
             this.txtre = new System.Windows.Forms.TextBox();
             this.txtrInstReg = new System.Windows.Forms.TextBox();
             this._lblIR = new System.Windows.Forms.Label();
@@ -78,17 +84,12 @@ namespace processor
             this.txtr6 = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.ramList = new System.Windows.Forms.ListBox();
-            this.lblOpcode = new System.Windows.Forms.Label();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.btnClear = new System.Windows.Forms.Button();
-            this.btnLoad = new System.Windows.Forms.Button();
-            this.txtCode = new System.Windows.Forms.RichTextBox();
-            this.lblStatus = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -101,13 +102,13 @@ namespace processor
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Cursor = System.Windows.Forms.Cursors.VSplit;
+            this.splitContainer1.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.IsSplitterFixed = true;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
             // 
@@ -136,14 +137,52 @@ namespace processor
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Input";
             // 
-            // btnStep
+            // btnClear
             // 
-            this.btnStep.Location = new System.Drawing.Point(94, 71);
-            this.btnStep.Name = "btnStep";
-            this.btnStep.Size = new System.Drawing.Size(75, 23);
-            this.btnStep.TabIndex = 3;
-            this.btnStep.Text = "Step";
-            this.btnStep.UseVisualStyleBackColor = true;
+            this.btnClear.Location = new System.Drawing.Point(187, 316);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.TabIndex = 8;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            // 
+            // btnLoad
+            // 
+            this.btnLoad.Location = new System.Drawing.Point(268, 316);
+            this.btnLoad.Name = "btnLoad";
+            this.btnLoad.Size = new System.Drawing.Size(75, 23);
+            this.btnLoad.TabIndex = 7;
+            this.btnLoad.Text = "Load";
+            this.btnLoad.UseVisualStyleBackColor = true;
+            // 
+            // txtCode
+            // 
+            this.txtCode.Location = new System.Drawing.Point(6, 23);
+            this.txtCode.Name = "txtCode";
+            this.txtCode.Size = new System.Drawing.Size(337, 291);
+            this.txtCode.TabIndex = 6;
+            this.txtCode.Text = "";
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.lblStatus);
+            this.groupBox6.Controls.Add(this.btnStart);
+            this.groupBox6.Controls.Add(this.btnStep);
+            this.groupBox6.Controls.Add(this.btnHalt);
+            this.groupBox6.Location = new System.Drawing.Point(9, 338);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(337, 100);
+            this.groupBox6.TabIndex = 4;
+            this.groupBox6.TabStop = false;
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(6, 19);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(84, 15);
+            this.lblStatus.TabIndex = 4;
+            this.lblStatus.Text = "Status: {status}";
             // 
             // btnStart
             // 
@@ -153,6 +192,15 @@ namespace processor
             this.btnStart.TabIndex = 2;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
+            // 
+            // btnStep
+            // 
+            this.btnStep.Location = new System.Drawing.Point(94, 71);
+            this.btnStep.Name = "btnStep";
+            this.btnStep.Size = new System.Drawing.Size(75, 23);
+            this.btnStep.TabIndex = 3;
+            this.btnStep.Text = "Step";
+            this.btnStep.UseVisualStyleBackColor = true;
             // 
             // btnHalt
             // 
@@ -166,8 +214,9 @@ namespace processor
             // 
             // splitContainer2
             // 
-            this.splitContainer2.Cursor = System.Windows.Forms.Cursors.VSplit;
+            this.splitContainer2.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.IsSplitterFixed = true;
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
             this.splitContainer2.Name = "splitContainer2";
             // 
@@ -197,6 +246,7 @@ namespace processor
             // 
             this.splitContainer3.Cursor = System.Windows.Forms.Cursors.HSplit;
             this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.IsSplitterFixed = true;
             this.splitContainer3.Location = new System.Drawing.Point(3, 19);
             this.splitContainer3.Name = "splitContainer3";
             this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -216,6 +266,7 @@ namespace processor
             // 
             this.groupBox4.Controls.Add(this.lblOpcode);
             this.groupBox4.Controls.Add(this.lblOpcodeDesc);
+            this.groupBox4.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(0, 0);
             this.groupBox4.Name = "groupBox4";
@@ -223,6 +274,15 @@ namespace processor
             this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Control";
+            // 
+            // lblOpcode
+            // 
+            this.lblOpcode.AutoSize = true;
+            this.lblOpcode.Location = new System.Drawing.Point(16, 30);
+            this.lblOpcode.Name = "lblOpcode";
+            this.lblOpcode.Size = new System.Drawing.Size(55, 15);
+            this.lblOpcode.TabIndex = 2;
+            this.lblOpcode.Text = "{opcode}";
             // 
             // lblOpcodeDesc
             // 
@@ -235,21 +295,21 @@ namespace processor
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.label13);
+            this.groupBox5.Controls.Add(this._lblrc);
             this.groupBox5.Controls.Add(this.txtrf);
-            this.groupBox5.Controls.Add(this.label14);
+            this.groupBox5.Controls.Add(this._lblrf);
             this.groupBox5.Controls.Add(this.txtr8);
-            this.groupBox5.Controls.Add(this.label15);
+            this.groupBox5.Controls.Add(this._lblre);
             this.groupBox5.Controls.Add(this.txtr9);
-            this.groupBox5.Controls.Add(this.label16);
+            this.groupBox5.Controls.Add(this._lblrd);
             this.groupBox5.Controls.Add(this.txtra);
-            this.groupBox5.Controls.Add(this.label17);
+            this.groupBox5.Controls.Add(this._lblrb);
             this.groupBox5.Controls.Add(this.txtrb);
-            this.groupBox5.Controls.Add(this.label18);
+            this.groupBox5.Controls.Add(this._lblra);
             this.groupBox5.Controls.Add(this.txtrc);
-            this.groupBox5.Controls.Add(this.label19);
+            this.groupBox5.Controls.Add(this._lblr9);
             this.groupBox5.Controls.Add(this.txtrd);
-            this.groupBox5.Controls.Add(this.label20);
+            this.groupBox5.Controls.Add(this._lblr8);
             this.groupBox5.Controls.Add(this.txtre);
             this.groupBox5.Controls.Add(this.txtrInstReg);
             this.groupBox5.Controls.Add(this._lblIR);
@@ -271,6 +331,7 @@ namespace processor
             this.groupBox5.Controls.Add(this.txtr5);
             this.groupBox5.Controls.Add(this._lblr0);
             this.groupBox5.Controls.Add(this.txtr6);
+            this.groupBox5.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox5.Location = new System.Drawing.Point(0, 0);
             this.groupBox5.Name = "groupBox5";
@@ -279,136 +340,144 @@ namespace processor
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Registers";
             // 
-            // label13
+            // _lblrc
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(124, 145);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(41, 15);
-            this.label13.TabIndex = 35;
-            this.label13.Text = "Reg C:";
+            this._lblrc.AutoSize = true;
+            this._lblrc.Location = new System.Drawing.Point(124, 145);
+            this._lblrc.Name = "_lblrc";
+            this._lblrc.Size = new System.Drawing.Size(41, 15);
+            this._lblrc.TabIndex = 35;
+            this._lblrc.Text = "Reg C:";
             // 
             // txtrf
             // 
+            this.txtrf.Enabled = false;
             this.txtrf.Location = new System.Drawing.Point(168, 229);
             this.txtrf.Name = "txtrf";
             this.txtrf.Size = new System.Drawing.Size(56, 23);
             this.txtrf.TabIndex = 27;
             this.txtrf.Text = "00000000";
             // 
-            // label14
+            // _lblrf
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(124, 232);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(39, 15);
-            this.label14.TabIndex = 34;
-            this.label14.Text = "Reg F:";
+            this._lblrf.AutoSize = true;
+            this._lblrf.Location = new System.Drawing.Point(124, 232);
+            this._lblrf.Name = "_lblrf";
+            this._lblrf.Size = new System.Drawing.Size(39, 15);
+            this._lblrf.TabIndex = 34;
+            this._lblrf.Text = "Reg F:";
             // 
             // txtr8
             // 
+            this.txtr8.Enabled = false;
             this.txtr8.Location = new System.Drawing.Point(168, 27);
             this.txtr8.Name = "txtr8";
             this.txtr8.Size = new System.Drawing.Size(56, 23);
             this.txtr8.TabIndex = 20;
             this.txtr8.Text = "00000000";
             // 
-            // label15
+            // _lblre
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(124, 203);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(39, 15);
-            this.label15.TabIndex = 33;
-            this.label15.Text = "Reg E:";
+            this._lblre.AutoSize = true;
+            this._lblre.Location = new System.Drawing.Point(124, 203);
+            this._lblre.Name = "_lblre";
+            this._lblre.Size = new System.Drawing.Size(39, 15);
+            this._lblre.TabIndex = 33;
+            this._lblre.Text = "Reg E:";
             // 
             // txtr9
             // 
+            this.txtr9.Enabled = false;
             this.txtr9.Location = new System.Drawing.Point(168, 55);
             this.txtr9.Name = "txtr9";
             this.txtr9.Size = new System.Drawing.Size(56, 23);
             this.txtr9.TabIndex = 21;
             this.txtr9.Text = "00000000";
             // 
-            // label16
+            // _lblrd
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(124, 174);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(41, 15);
-            this.label16.TabIndex = 32;
-            this.label16.Text = "Reg D:";
+            this._lblrd.AutoSize = true;
+            this._lblrd.Location = new System.Drawing.Point(124, 174);
+            this._lblrd.Name = "_lblrd";
+            this._lblrd.Size = new System.Drawing.Size(41, 15);
+            this._lblrd.TabIndex = 32;
+            this._lblrd.Text = "Reg D:";
             // 
             // txtra
             // 
+            this.txtra.Enabled = false;
             this.txtra.Location = new System.Drawing.Point(168, 84);
             this.txtra.Name = "txtra";
             this.txtra.Size = new System.Drawing.Size(56, 23);
             this.txtra.TabIndex = 22;
             this.txtra.Text = "00000000";
             // 
-            // label17
+            // _lblrb
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(123, 116);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(40, 15);
-            this.label17.TabIndex = 31;
-            this.label17.Text = "Reg B:";
+            this._lblrb.AutoSize = true;
+            this._lblrb.Location = new System.Drawing.Point(123, 116);
+            this._lblrb.Name = "_lblrb";
+            this._lblrb.Size = new System.Drawing.Size(40, 15);
+            this._lblrb.TabIndex = 31;
+            this._lblrb.Text = "Reg B:";
             // 
             // txtrb
             // 
+            this.txtrb.Enabled = false;
             this.txtrb.Location = new System.Drawing.Point(168, 113);
             this.txtrb.Name = "txtrb";
             this.txtrb.Size = new System.Drawing.Size(56, 23);
             this.txtrb.TabIndex = 23;
             this.txtrb.Text = "00000000";
             // 
-            // label18
+            // _lblra
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(123, 87);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(41, 15);
-            this.label18.TabIndex = 30;
-            this.label18.Text = "Reg A:";
+            this._lblra.AutoSize = true;
+            this._lblra.Location = new System.Drawing.Point(123, 87);
+            this._lblra.Name = "_lblra";
+            this._lblra.Size = new System.Drawing.Size(41, 15);
+            this._lblra.TabIndex = 30;
+            this._lblra.Text = "Reg A:";
             // 
             // txtrc
             // 
+            this.txtrc.Enabled = false;
             this.txtrc.Location = new System.Drawing.Point(168, 142);
             this.txtrc.Name = "txtrc";
             this.txtrc.Size = new System.Drawing.Size(56, 23);
             this.txtrc.TabIndex = 24;
             this.txtrc.Text = "00000000";
             // 
-            // label19
+            // _lblr9
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(123, 58);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(39, 15);
-            this.label19.TabIndex = 29;
-            this.label19.Text = "Reg 9:";
+            this._lblr9.AutoSize = true;
+            this._lblr9.Location = new System.Drawing.Point(123, 58);
+            this._lblr9.Name = "_lblr9";
+            this._lblr9.Size = new System.Drawing.Size(39, 15);
+            this._lblr9.TabIndex = 29;
+            this._lblr9.Text = "Reg 9:";
             // 
             // txtrd
             // 
+            this.txtrd.Enabled = false;
             this.txtrd.Location = new System.Drawing.Point(168, 171);
             this.txtrd.Name = "txtrd";
             this.txtrd.Size = new System.Drawing.Size(56, 23);
             this.txtrd.TabIndex = 25;
             this.txtrd.Text = "00000000";
             // 
-            // label20
+            // _lblr8
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(123, 30);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(39, 15);
-            this.label20.TabIndex = 28;
-            this.label20.Text = "Reg 8:";
+            this._lblr8.AutoSize = true;
+            this._lblr8.Location = new System.Drawing.Point(123, 30);
+            this._lblr8.Name = "_lblr8";
+            this._lblr8.Size = new System.Drawing.Size(39, 15);
+            this._lblr8.TabIndex = 28;
+            this._lblr8.Text = "Reg 8:";
             // 
             // txtre
             // 
+            this.txtre.Enabled = false;
             this.txtre.Location = new System.Drawing.Point(168, 200);
             this.txtre.Name = "txtre";
             this.txtre.Size = new System.Drawing.Size(56, 23);
@@ -417,6 +486,7 @@ namespace processor
             // 
             // txtrInstReg
             // 
+            this.txtrInstReg.Enabled = false;
             this.txtrInstReg.Location = new System.Drawing.Point(287, 229);
             this.txtrInstReg.Name = "txtrInstReg";
             this.txtrInstReg.Size = new System.Drawing.Size(106, 23);
@@ -434,6 +504,7 @@ namespace processor
             // 
             // txtProgCounter
             // 
+            this.txtProgCounter.Enabled = false;
             this.txtProgCounter.Location = new System.Drawing.Point(287, 48);
             this.txtProgCounter.Name = "txtProgCounter";
             this.txtProgCounter.Size = new System.Drawing.Size(56, 23);
@@ -460,6 +531,7 @@ namespace processor
             // 
             // txtr7
             // 
+            this.txtr7.Enabled = false;
             this.txtr7.Location = new System.Drawing.Point(61, 229);
             this.txtr7.Name = "txtr7";
             this.txtr7.Size = new System.Drawing.Size(56, 23);
@@ -477,6 +549,7 @@ namespace processor
             // 
             // txtr0
             // 
+            this.txtr0.Enabled = false;
             this.txtr0.Location = new System.Drawing.Point(61, 27);
             this.txtr0.Name = "txtr0";
             this.txtr0.Size = new System.Drawing.Size(56, 23);
@@ -494,6 +567,7 @@ namespace processor
             // 
             // txtr1
             // 
+            this.txtr1.Enabled = false;
             this.txtr1.Location = new System.Drawing.Point(61, 55);
             this.txtr1.Name = "txtr1";
             this.txtr1.Size = new System.Drawing.Size(56, 23);
@@ -511,6 +585,7 @@ namespace processor
             // 
             // txtr2
             // 
+            this.txtr2.Enabled = false;
             this.txtr2.Location = new System.Drawing.Point(61, 84);
             this.txtr2.Name = "txtr2";
             this.txtr2.Size = new System.Drawing.Size(56, 23);
@@ -528,6 +603,7 @@ namespace processor
             // 
             // txtr3
             // 
+            this.txtr3.Enabled = false;
             this.txtr3.Location = new System.Drawing.Point(61, 113);
             this.txtr3.Name = "txtr3";
             this.txtr3.Size = new System.Drawing.Size(56, 23);
@@ -545,6 +621,7 @@ namespace processor
             // 
             // txtr4
             // 
+            this.txtr4.Enabled = false;
             this.txtr4.Location = new System.Drawing.Point(61, 142);
             this.txtr4.Name = "txtr4";
             this.txtr4.Size = new System.Drawing.Size(56, 23);
@@ -562,6 +639,7 @@ namespace processor
             // 
             // txtr5
             // 
+            this.txtr5.Enabled = false;
             this.txtr5.Location = new System.Drawing.Point(61, 171);
             this.txtr5.Name = "txtr5";
             this.txtr5.Size = new System.Drawing.Size(56, 23);
@@ -579,6 +657,7 @@ namespace processor
             // 
             // txtr6
             // 
+            this.txtr6.Enabled = false;
             this.txtr6.Location = new System.Drawing.Point(61, 200);
             this.txtr6.Name = "txtr6";
             this.txtr6.Size = new System.Drawing.Size(56, 23);
@@ -609,69 +688,17 @@ namespace processor
             this.ramList.Size = new System.Drawing.Size(199, 428);
             this.ramList.TabIndex = 0;
             // 
-            // lblOpcode
-            // 
-            this.lblOpcode.AutoSize = true;
-            this.lblOpcode.Location = new System.Drawing.Point(16, 30);
-            this.lblOpcode.Name = "lblOpcode";
-            this.lblOpcode.Size = new System.Drawing.Size(55, 15);
-            this.lblOpcode.TabIndex = 2;
-            this.lblOpcode.Text = "{opcode}";
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.lblStatus);
-            this.groupBox6.Controls.Add(this.btnStart);
-            this.groupBox6.Controls.Add(this.btnStep);
-            this.groupBox6.Controls.Add(this.btnHalt);
-            this.groupBox6.Location = new System.Drawing.Point(9, 338);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(337, 100);
-            this.groupBox6.TabIndex = 4;
-            this.groupBox6.TabStop = false;
-            // 
-            // btnClear
-            // 
-            this.btnClear.Location = new System.Drawing.Point(187, 316);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(75, 23);
-            this.btnClear.TabIndex = 8;
-            this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = true;
-            // 
-            // btnLoad
-            // 
-            this.btnLoad.Location = new System.Drawing.Point(268, 316);
-            this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(75, 23);
-            this.btnLoad.TabIndex = 7;
-            this.btnLoad.Text = "Load";
-            this.btnLoad.UseVisualStyleBackColor = true;
-            // 
-            // txtCode
-            // 
-            this.txtCode.Location = new System.Drawing.Point(6, 23);
-            this.txtCode.Name = "txtCode";
-            this.txtCode.Size = new System.Drawing.Size(337, 291);
-            this.txtCode.TabIndex = 6;
-            this.txtCode.Text = "";
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(6, 19);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(84, 15);
-            this.lblStatus.TabIndex = 4;
-            this.lblStatus.Text = "Status: {status}";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(967, 450);
             this.Controls.Add(this.splitContainer1);
+            this.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "MainForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Vole by ferityigitbalaban";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -679,6 +706,8 @@ namespace processor
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
@@ -693,8 +722,6 @@ namespace processor
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox3.ResumeLayout(false);
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -734,21 +761,21 @@ namespace processor
         private System.Windows.Forms.Label _lblr0;
         private System.Windows.Forms.TextBox txtr6;
         private System.Windows.Forms.Label lblOpcodeDesc;
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label _lblrc;
         private System.Windows.Forms.TextBox txtrf;
-        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label _lblrf;
         private System.Windows.Forms.TextBox txtr8;
-        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label _lblre;
         private System.Windows.Forms.TextBox txtr9;
-        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label _lblrd;
         private System.Windows.Forms.TextBox txtra;
-        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label _lblrb;
         private System.Windows.Forms.TextBox txtrb;
-        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label _lblra;
         private System.Windows.Forms.TextBox txtrc;
-        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label _lblr9;
         private System.Windows.Forms.TextBox txtrd;
-        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label _lblr8;
         private System.Windows.Forms.TextBox txtre;
         private System.Windows.Forms.Label lblOpcode;
         private System.Windows.Forms.Button btnClear;
