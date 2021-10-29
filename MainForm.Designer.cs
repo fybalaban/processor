@@ -221,6 +221,7 @@ namespace processor
             this.btnStart.TabIndex = 2;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // btnStep
             // 
@@ -230,6 +231,7 @@ namespace processor
             this.btnStep.TabIndex = 3;
             this.btnStep.Text = "Step";
             this.btnStep.UseVisualStyleBackColor = true;
+            this.btnStep.Click += new System.EventHandler(this.btnStep_Click);
             // 
             // btnHalt
             // 
