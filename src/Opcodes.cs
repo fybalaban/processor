@@ -1,4 +1,6 @@
-﻿namespace processor
+﻿using processor.Properties;
+
+namespace processor
 {
     public partial class MainForm
     {
