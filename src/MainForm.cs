@@ -10,8 +10,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using processor.Properties;
-
 using static processor.Extensions;
 
 namespace processor
@@ -41,7 +39,7 @@ namespace processor
         {
             if (radHex.Checked is true)
             {
-                txtrInstReg.Text = "00";
+                txtrInstReg.Text = "0000";
                 txtProgCounter.Text = "00";
                 for (int i = 0; i < 16; i++)
                     Controls.Find($"txtr{i:x}", true)[0].Text = "00";
@@ -82,14 +80,14 @@ namespace processor
         /// </summary>
         /// <param name="address"></param>
         /// <param name="hexValue"></param>
-        private void LoadProgram(int address, string value) => ramList.Items[address] = $"{CnvRespectfully(address)}: {value}";
+        private void LoadProgram(int address, string value) => ramList.Items[address] = $"{CnvRespectfully(address, 2, 8)}: {value}";
 
         /// <summary>
         /// Write data to addressed memory cell
         /// </summary>
         /// <param name="address"></param>
         /// <param name="value"></param>
-        private void WriteRam(int address, int value) => ramList.Items[address] = $"{CnvRespectfully(address)}: {CnvRespectfully(value)}";
+        private void WriteRam(int address, int value) => ramList.Items[address] = $"{CnvRespectfully(address, 2, 8)}: {CnvRespectfully(value, 2, 8)}";
         #endregion
 
         #region Registers
@@ -179,8 +177,25 @@ namespace processor
         {
         }
 
+        private string Status = "Stopped";
+        
         private void btnStep_Click(object sender, EventArgs e)
         {
+            if (ReadInstRegister()[0] is 12) // Do not run method if instruction is 0xC - halt opcode
+            {
+                MessageBox.Show($"Reached end of execution: instruction 0x{txtrInstReg.Text} at 0x{CnvRespectfully(ReadCounter())} prevents further execution!",
+                    "Vole Runtime");
+                return;
+            }
+            int counter = ReadCounter();
+            
+            if (Status is "Running") // This check is useful to determine if the execution has just started or was already running
+                SetCounter(counter + 2);
+            else SetCounter(counter);
+            Status = "Running";
+            
+            int[] fields = ReadInstRegister();
+            ResolveOpcode(fields[0], fields[1], fields[2], fields[3]);
         }
     }
 }
