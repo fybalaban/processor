@@ -1,13 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using static processor.Extensions;
@@ -29,27 +22,27 @@ namespace processor
             ramList.Items.Clear();
             if (radHex.Checked is true)
                 for (int i = 0; i < 256; i++)
-                    ramList.Items.Add(string.Format("{0}: {1}", Convert.ToString(i, 16).PadLeft(2, '0').ToUpper(), "00"));
+                    ramList.Items.Add($"{Convert.ToString(i, 16).PadLeft(2, '0').ToUpper()}: 00");
             else
                 for (int i = 0; i < 256; i++)
-                    ramList.Items.Add(string.Format("{0}: {1}", Convert.ToString(i, 2).PadLeft(8, '0'), "00000000"));
+                    ramList.Items.Add($"{Convert.ToString(i, 2).PadLeft(8, '0')}: 00000000");
         }
 
         private void InitializeCpu()
         {
             if (radHex.Checked is true)
             {
-                txtrInstReg.Text = "0000";
-                txtProgCounter.Text = "00";
+                txtrInstReg.Text = @"0000";
+                txtProgCounter.Text = @"00";
                 for (int i = 0; i < 16; i++)
-                    Controls.Find($"txtr{i:x}", true)[0].Text = "00";
+                    Controls.Find($"txtr{i:x}", true)[0].Text = @"00";
             }
             else
             {
-                txtrInstReg.Text = "00000000";
-                txtProgCounter.Text = "00000000";
+                txtrInstReg.Text = @"00000000";
+                txtProgCounter.Text = @"00000000";
                 for (int i = 0; i < 16; i++)
-                    Controls.Find($"txtr{i:x}", true)[0].Text = "00000000";
+                    Controls.Find($"txtr{i:x}", true)[0].Text = @"00000000";
             }
         }
 
@@ -106,32 +99,30 @@ namespace processor
 
         private int[] ReadInstRegister()
         {
-            int[] r = new int[4];
+            int[] r = { 0, 0, 0, 0 };
             string[] a = radHex.Checked ? txtrInstReg.Text.Split1() : txtrInstReg.Text.Split4().ToArray();
             for (int i = 0; i < 4; i++)
                 r[i] = CnvRespectfully(a[i]);
             return r;
         }
 
-        private void SetInstRegister(int value) => txtrInstReg.Text = CnvRespectfully4(value);
+        private void SetInstRegister(int value) => txtrInstReg.Text = CnvRespectfully(value, 4, 16);
 
         #endregion
-
+        
         /// <summary>
         /// Converts integer to hexadecimal or binary representation in text according to selected view mode
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="value">Integer value in decimal</param>
+        /// <param name="hexPad">Left "0" padding to be applied for hexadecimal representation</param>
+        /// <param name="binPad">Left "0" padding to be applied for binary representation</param>
         /// <returns></returns>
-        private string CnvRespectfully(int value) => radHex.Checked ? Convert.ToString(value, 16).PadLeft(2, '0').ToUpper() : Convert.ToString(value, 2).PadLeft(8, '0');
-
-        private string CnvRespectfully4(int value) => radHex.Checked ? Convert.ToString(value, 16).PadLeft(4, '0').ToUpper() : Convert.ToString(value, 2).PadLeft(8, '0');
-
         private string CnvRespectfully(int value, int hexPad = 2, int binPad = 8) => radHex.Checked ? Convert.ToString(value, 16).PadLeft(hexPad, '0').ToUpper() : Convert.ToString(value, 2).PadLeft(binPad, '0');
 
         /// <summary>
         /// Converts hexadecimal or binary representation to integer according to selected view mode
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="value">Hexadecimal or binary representation string</param>
         /// <returns></returns>
         private int CnvRespectfully(string value) => radHex.Checked ? Convert.ToInt32(value, 16) : Convert.ToInt32(value, 2);
 
@@ -140,8 +131,6 @@ namespace processor
         /// <summary>
         /// Parses and loads instructions to ramList
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnLoad_Click(object sender, EventArgs e)
         {
             List<string> instructionList = new();
@@ -183,7 +172,7 @@ namespace processor
         {
             if (ReadInstRegister()[0] is 12) // Do not run method if instruction is 0xC - halt opcode
             {
-                MessageBox.Show($"Reached end of execution: instruction 0x{txtrInstReg.Text} at 0x{CnvRespectfully(ReadCounter())} prevents further execution!",
+                MessageBox.Show($"Reached end of execution: \ninstruction 0x{txtrInstReg.Text} at 0x{CnvRespectfully(ReadCounter())} prevents execution!",
                     "Vole Runtime");
                 return;
             }
