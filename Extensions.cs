@@ -12,7 +12,7 @@ namespace processor
         internal static string RemoveComment(string text)
         {
             int idx = text.LastIndexOf("#");
-            return idx > 0 ? text.Substring(0, idx) : "";
+            return idx > 0 ? text.Substring(0, idx) : text;
         }
 
         /// <summary>
@@ -31,6 +31,23 @@ namespace processor
         {
             for (int i = 0; i < text.Length; i += 2)
                 yield return text.Substring(i, Math.Min(2, text.Length - i));
+        }
+
+        internal static IEnumerable<string> Split4(this string text)
+        {
+            for (int i = 0; i < text.Length; i += 4)
+                yield return text.Substring(i, Math.Min(4, text.Length - i));
+        }
+
+        internal static string[] Split1(this string text)
+        {
+            char[] a = text.ToCharArray();
+            string[] r = new string[text.Length];
+            for (int i = 0; i < text.Length; i++)
+            {
+                r[i] = a[i].ToString();
+            }
+            return r;
         }
 
         internal static string ToBin(this int value) => Convert.ToString(value, 2).PadLeft(8, '0');
