@@ -73,7 +73,7 @@ namespace processor
         /// </summary>
         /// <param name="address"></param>
         /// <param name="hexValue"></param>
-        private void LoadProgram(int address, string value) => ramList.Items[address] = $"{CnvRespectfully(address, 2, 8)}: {value}";
+        private void LoadCode(int address, string value) => ramList.Items[address] = $"{CnvRespectfully(address, 2, 8)}: {value}";
 
         /// <summary>
         /// Write data to addressed memory cell
@@ -140,21 +140,23 @@ namespace processor
             // Removes comments from lines, drops empty lines and sets instructionList to this new collection
             List<string> instructionList = (from x in inputLines where !string.IsNullOrEmpty(RemoveComment(x)) select RemoveComment(x)).ToList();
 
-            List<string> funcCode, ramCode;
-            funcCode = (from x in instructionList where x.StartsWith("0x") select x).ToList();
-            ramCode = (from x in instructionList where x.StartsWith("1x") select x).ToList();
-
             if (radHex.Checked is true)
             {
-                LoadHexCode(funcCode);
-                LoadHexCode(ramCode);
+                // This loads CPU instructions to RAM, starting from address 0x00 and going up to 0xFF
+                LoadHexCode((from x in instructionList where x.StartsWith("0x") select x).ToList());
+                // This executes RAM write instructions, ultimately overwriting RAM with data
+                ExecuteRamWrite((from x in instructionList where x.StartsWith("1x") select x).ToList());
             }
             else
             {
-
+                
             }
         }
 
+        /// <summary>
+        /// Loads hexadecimal CPU instructions to RAM
+        /// </summary>
+        /// <param name="codes"></param>
         private void LoadHexCode(List<string> codes)
         {
             codes = (from x in codes select RemoveLeading(x)).ToList();
@@ -162,10 +164,32 @@ namespace processor
             for (int i = 0; i < codes.Count; i++)
             {
                 string[] enm = codes[i].Split2().ToArray();
-                LoadProgram(j, enm[0]);
-                LoadProgram(j+1, enm[1]);
+                LoadCode(j, enm[0]);
+                LoadCode(j+1, enm[1]);
                 j += 2;
             }
+        }
+
+        /// <summary>
+        /// Writes data to RAM without using CPU instructions
+        /// </summary>
+        /// <param name="codes"></param>
+        private void ExecuteRamWrite(List<string> codes)
+        {
+            foreach (string code in codes) // code is a 2 byte hexadecimal instruction: 1A34
+            {
+                string[] ia = code.Split2().ToArray();
+                WriteRam(CnvRespectfully(ia[0]), CnvRespectfully(ia[1]));
+            }
+        }
+
+        /// <summary>
+        /// Loads binary CPU instructions to RAM
+        /// </summary>
+        /// <param name="codes"></param>
+        private void LoadBinCode(List<string> codes)
+        {
+            throw new NotImplementedException();
         }
 
         private void btnClear_Click(object sender, EventArgs e) => InitializeRamList();
