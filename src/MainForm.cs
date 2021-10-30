@@ -133,30 +133,38 @@ namespace processor
         /// </summary>
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            List<string> instructionList = new();
+            if (string.IsNullOrWhiteSpace(txtCode.Text)) return;
+            
+            // Next line reads content from txtCode, splits it into lines using '\n' as delimiter and casts the IEnumerable to List
+            List<string> inputLines = txtCode.Text.Split((char)10, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList();
+            // Removes comments from lines, drops empty lines and sets instructionList to this new collection
+            List<string> instructionList = (from x in inputLines where !string.IsNullOrEmpty(RemoveComment(x)) select RemoveComment(x)).ToList();
 
-            if (!string.IsNullOrWhiteSpace(txtCode.Text))
-            {
-                List<string> inputLines = txtCode.Text.Trim().Split((char)10, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList();
-                inputLines = (from x in inputLines select RemoveComment(x)).ToList(); // removes comments from lines
-                instructionList = (from x in inputLines where string.IsNullOrEmpty(x) is false select x).ToList(); // drops empty elements
-            }
+            List<string> funcCode, ramCode;
+            funcCode = (from x in instructionList where x.StartsWith("0x") select x).ToList();
+            ramCode = (from x in instructionList where x.StartsWith("1x") select x).ToList();
 
             if (radHex.Checked is true)
             {
-                instructionList = (from x in instructionList select RemoveLeading(x)).ToList();
-                int j = 0;
-                for (int i = 0; i < instructionList.Count; i++)
-                {
-                    string[] enm = instructionList[i].Split2().ToArray();
-                    LoadProgram(j, enm[0]);
-                    LoadProgram(j+1, enm[1]);
-                    j += 2;
-                }
+                LoadHexCode(funcCode);
+                LoadHexCode(ramCode);
             }
             else
             {
 
+            }
+        }
+
+        private void LoadHexCode(List<string> codes)
+        {
+            codes = (from x in codes select RemoveLeading(x)).ToList();
+            int j = 0;
+            for (int i = 0; i < codes.Count; i++)
+            {
+                string[] enm = codes[i].Split2().ToArray();
+                LoadProgram(j, enm[0]);
+                LoadProgram(j+1, enm[1]);
+                j += 2;
             }
         }
 
