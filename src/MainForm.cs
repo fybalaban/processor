@@ -164,14 +164,19 @@ namespace processor
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            btnStep.Enabled = false;
+            btnClear.Enabled = false;
+            btnStart.Enabled = false;
+            
+            do
+            {
+                Execute();
+            } while (_status is not CpuStatus.Stopped);
         }
 
         private CpuStatus _status = CpuStatus.Stopped;
         
-        private void btnStep_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void btnStep_Click(object sender, EventArgs e) => Execute();
 
         private void Execute()
         {
@@ -179,6 +184,7 @@ namespace processor
             {
                 MessageBox.Show($"Reached end of execution: \ninstruction 0x{txtrInstReg.Text} at 0x{CnvRespectfully(ReadCounter())} prevents execution!",
                     "Vole Runtime");
+                SetStatus(CpuStatus.Stopped);
                 return;
             }
             int counter = ReadCounter();
@@ -186,10 +192,22 @@ namespace processor
             if (_status is CpuStatus.Running) // This check is useful to determine if the execution has just started or was already running
                 SetCounter(counter + 2);
             else SetCounter(counter);
-            _status = CpuStatus.Running;
+            SetStatus(CpuStatus.Running);
             
             int[] fields = ReadInstRegister();
             ResolveOpcode(fields[0], fields[1], fields[2], fields[3]);
+        }
+
+        private void SetStatus(CpuStatus status)
+        {
+            _status = status;
+            lblStatus.Text = $"Status: {status}";
+            if (status is CpuStatus.Stopped) // Retrieve disabled controls
+            {
+                btnClear.Enabled = true;
+                btnStart.Enabled = true;
+                btnStep.Enabled = true;
+            }
         }
     }
 }
