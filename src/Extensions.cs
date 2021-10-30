@@ -49,13 +49,5 @@ namespace processor
             }
             return r;
         }
-
-        internal static string ToBin(this int value) => Convert.ToString(value, 2).PadLeft(8, '0');
-
-        internal static string ToHex(this int value) => Convert.ToString(value, 16);
-
-        internal static string ToHex2(this int value) => value.ToHex().PadLeft(2, '0');
-
-        internal static int Hex2Int(this string value) => Convert.ToInt32(value, 8);
     }
 }
