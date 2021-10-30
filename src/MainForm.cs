@@ -166,9 +166,14 @@ namespace processor
         {
         }
 
-        private string Status = "Stopped";
+        private CpuStatus _status = CpuStatus.Stopped;
         
         private void btnStep_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Execute()
         {
             if (ReadInstRegister()[0] is 12) // Do not run method if instruction is 0xC - halt opcode
             {
@@ -178,10 +183,10 @@ namespace processor
             }
             int counter = ReadCounter();
             
-            if (Status is "Running") // This check is useful to determine if the execution has just started or was already running
+            if (_status is CpuStatus.Running) // This check is useful to determine if the execution has just started or was already running
                 SetCounter(counter + 2);
             else SetCounter(counter);
-            Status = "Running";
+            _status = CpuStatus.Running;
             
             int[] fields = ReadInstRegister();
             ResolveOpcode(fields[0], fields[1], fields[2], fields[3]);
