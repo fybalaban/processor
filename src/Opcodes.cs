@@ -54,18 +54,27 @@ namespace processor
         {
             lblOpcode.Text = $"0x1";
             lblOpcodeDesc.Text = Resources._0x1En;
+
+            int val = ReadRam(x * 16 + y);
+            WriteRegister(r, val);
         }
 
         private void Op2(int r, int x, int y)
         {
             lblOpcode.Text = $"0x2";
             lblOpcodeDesc.Text = Resources._0x2En;
+            
+            int val = x * 16 + y;
+            WriteRegister(r, val);
         }
 
         private void Op3(int r, int x, int y)
         {
             lblOpcode.Text = $"0x3";
             lblOpcodeDesc.Text = Resources._0x3En;
+
+            int val = ReadRegister(r);
+            WriteRam(x * 16 + y, val);
         }
 
         private void Op4(int r, int x, int y)
