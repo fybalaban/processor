@@ -22,7 +22,8 @@ namespace processor
         /// <returns></returns>
         internal static string RemoveLeading(string text)
         {
-            if (text.StartsWith("0x") | text.StartsWith("1x")) return text.Remove(0, 2);
+            if (text.StartsWith("0x") || text.StartsWith("1x")) 
+                return text.Remove(0, 2);
             MessageBox.Show("Error while parsing code:\nHexadecimal CPU instructions must start with \"0x\" and ram write instructions must start with \"1x\"!", "Vole Language Parser");
             return "";
         }

@@ -143,9 +143,9 @@ namespace processor
             if (radHex.Checked is true)
             {
                 // This loads CPU instructions to RAM, starting from address 0x00 and going up to 0xFF
-                LoadHexCode((from x in instructionList where x.StartsWith("0x") select x).ToList());
+                LoadHexCode((from x in instructionList where x.StartsWith("0x") select x.Remove(0, 2)).ToList());
                 // This executes RAM write instructions, ultimately overwriting RAM with data
-                ExecuteRamWrite((from x in instructionList where x.StartsWith("1x") select x).ToList());
+                ExecuteRamWrite((from x in instructionList where x.StartsWith("1x") select x.Remove(0, 2)).ToList());
             }
             else
             {
@@ -159,7 +159,6 @@ namespace processor
         /// <param name="codes"></param>
         private void LoadHexCode(List<string> codes)
         {
-            codes = (from x in codes select RemoveLeading(x)).ToList();
             int j = 0;
             for (int i = 0; i < codes.Count; i++)
             {
