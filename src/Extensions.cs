@@ -16,14 +16,14 @@ namespace processor
         }
 
         /// <summary>
-        /// Removes leading 0x prefix in hexadecimal instructions, only returning 4 char part
+        /// Removes leading 0x or 1x prefix in hexadecimal instructions, only returning 4 char part
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
         internal static string RemoveLeading(string text)
         {
-            if (text.Contains("0x")) return text.Remove(0, 2);
-            MessageBox.Show("Error while parsing code:\nHexadecimal instruction codes must start with \"0x\"!", "Vole Language Parser");
+            if (text.StartsWith("0x") | text.StartsWith("1x")) return text.Remove(0, 2);
+            MessageBox.Show("Error while parsing code:\nHexadecimal CPU instructions must start with \"0x\" and ram write instructions must start with \"1x\"!", "Vole Language Parser");
             return "";
         }
 
