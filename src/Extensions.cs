@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace processor
@@ -12,7 +9,7 @@ namespace processor
         internal static string RemoveComment(string text)
         {
             int idx = text.LastIndexOf("#");
-            return idx > 0 ? text.Substring(0, idx) : text;
+            return idx > 0 ? text[..idx] : text;
         }
 
         /// <summary>
@@ -71,7 +68,6 @@ namespace processor
                 _ => 0
             };
 
-            double sum;
             string mantissa = new(new[] { '.', bin[4], bin[5], bin[6], bin[7] });
             switch (exp)
             {
@@ -88,7 +84,7 @@ namespace processor
             
 
             string[] parts = mantissa.Split('.');
-            sum = Convert.ToInt32(parts[0], 2);
+            double sum = Convert.ToInt32(parts[0], 2);
             for (int i = 0; i < parts[1].Length; i++)
                 sum += int.Parse(parts[1][i].ToString()) / Math.Pow(2, i + 1);
 
