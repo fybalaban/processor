@@ -52,19 +52,22 @@ namespace processor
         /// </summary>
         /// <param name="address"></param>
         /// <returns></returns>
-        private int ReadRam(int address) => CnvRespectfully(ramList.Items[address].ToString().Split(':', StringSplitOptions.TrimEntries)[1]);
+        private int ReadRam(int address) => CnvRespectfully(ramList.Items[address].ToString()?.Split(':', StringSplitOptions.TrimEntries)[1]);
 
         /// <summary>
-        /// Reads the amount of memory cells supplied in "count", starts reading from "address". 0 for count only reads addressed memory, 1 reads addressed and next cell
+        /// Reads the amount of memory cells supplied in "count", starts reading from "address". count = 1 only reads startAddress, count = 2 reads startAddress and the next cell.
         /// </summary>
-        /// <param name="address"></param>
-        /// <param name="count"></param>
+        /// <param name="startAddress"></param>
+        /// <param name="readCount"></param>
         /// <returns></returns>
-        private int ReadRam(int address, int count = 0)
+        private int ReadConsecutive(int startAddress, int readCount = 1)
         {
+            if (readCount < 1)
+                throw new ArgumentOutOfRangeException(nameof(readCount));
+            
             string append = string.Empty;
-            for (int i = 0; i <= count; i++)
-                append += ramList.Items[address + i].ToString().Split(':', StringSplitOptions.TrimEntries)[1];
+            for (int i = startAddress; i <= startAddress + readCount; i++)
+                append += ramList.Items[i].ToString()?.Split(':', StringSplitOptions.TrimEntries)[1];
             return CnvRespectfully(append);
         }
 
@@ -72,15 +75,15 @@ namespace processor
         /// Used by loader for writing hexadecimal/binary instructions
         /// </summary>
         /// <param name="address"></param>
-        /// <param name="hexValue"></param>
-        private void LoadCode(int address, string value) => ramList.Items[address] = $"{CnvRespectfully(address, 2, 8)}: {value}";
+        /// <param name="value"></param>
+        private void LoadCode(int address, string value) => ramList.Items[address] = $"{CnvRespectfully(address)}: {value}";
 
         /// <summary>
         /// Write data to addressed memory cell
         /// </summary>
         /// <param name="address"></param>
         /// <param name="value"></param>
-        private void WriteRam(int address, int value) => ramList.Items[address] = $"{CnvRespectfully(address, 2, 8)}: {CnvRespectfully(value, 2, 8)}";
+        private void WriteRam(int address, int value) => ramList.Items[address] = $"{CnvRespectfully(address)}: {CnvRespectfully(value)}";
         #endregion
 
         #region Registers
@@ -94,7 +97,7 @@ namespace processor
         private void SetCounter(int value)
         {
             txtProgCounter.Text = CnvRespectfully(value);
-            SetInstRegister(ReadRam(ReadCounter(), 1));
+            SetInstRegister(ReadConsecutive(ReadCounter(), 2));
         }
 
         private int[] ReadInstRegister()
@@ -126,8 +129,6 @@ namespace processor
         /// <returns></returns>
         private int CnvRespectfully(string value) => radHex.Checked ? Convert.ToInt32(value, 16) : Convert.ToInt32(value, 2);
 
-        private string AppendOperand(int x, int y) => radHex.Checked ? CnvRespectfully((x * 16) + y, 2, 8) : CnvRespectfully(5, 2, 4) + CnvRespectfully(3, 2, 4);
-
         /// <summary>
         /// Parses and loads instructions to ramList
         /// </summary>
@@ -149,7 +150,7 @@ namespace processor
             }
             else
             {
-                
+                throw new NotImplementedException();
             }
         }
 
@@ -173,11 +174,10 @@ namespace processor
         /// Writes data to RAM without using CPU instructions
         /// </summary>
         /// <param name="codes"></param>
-        private void ExecuteRamWrite(List<string> codes)
+        private void ExecuteRamWrite(IEnumerable<string> codes)
         {
-            foreach (string code in codes) // code is a 2 byte hexadecimal instruction: 1A34
+            foreach (string[] ia in codes.Select(code => code.Split2().ToArray()))
             {
-                string[] ia = code.Split2().ToArray();
                 WriteRam(CnvRespectfully(ia[0]), CnvRespectfully(ia[1]));
             }
         }
