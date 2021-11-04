@@ -98,6 +98,64 @@ namespace processor
             return CalculateBinFloat(Convert.ToString(Convert.ToInt32(hex, 16), 2).PadLeft(8, '0'));
         }
 
+        internal static string CnvB10FloatToB2Float(double num)
+        {
+            string binary = "";
+            
+            int integral = (int) num;
+            double fraction = num - integral;
+            
+            while (integral > 0)
+            {
+                int rem = integral % 2;
+                binary += (char)(rem + '0'); // a nice trick to append 0 to binary string if rem = 0 and append 1 if rem = 1 
+                integral /= 2;
+            }
+
+            binary = binary.Reverse(); // somehow we need to reverse the remainder collection to get the actual binary integral part
+            
+            binary += '.';
+
+            int precision = 2; // don't touch t
+            while (precision-- > 0)
+            {
+                fraction *= 2;
+                int fract_bit = (int) fraction;
+  
+                if (fract_bit == 1)
+                {
+                    fraction -= fract_bit;
+                    binary += (char)(1 + '0');
+                }
+                else binary += (char)(0 + '0');
+                }
+  
+            return binary;
+        }
+  
+        private static string Reverse(this string text)
+        {
+            char[] temparray = text.ToCharArray();
+            int left, right = 0;
+            right = temparray.Length - 1;
+  
+            for (left = 0; left < right; left++, right--)
+                (temparray[left], temparray[right]) = (temparray[right], temparray[left]);
+
+            return string.Join("",temparray);
+        }
+
+        internal static int BooleanOr(int left, int right) => left + right >= 1 ? 1 : 0;
+
+        internal static int BooleanAnd(int left, int right) => left + right > 1 ? 1 : 0;
+
+        internal static int BooleanXor(int left, int right)
+        {
+            if (left + right is > 1 or 0)
+                return 0;
+            return 1;
+        }
+
         private static string Add(string str, int count = 0)
         {
             for (int i = 1; i < count; i++)
