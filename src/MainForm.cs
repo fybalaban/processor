@@ -158,7 +158,7 @@ namespace processor
         /// Loads hexadecimal CPU instructions to RAM
         /// </summary>
         /// <param name="codes"></param>
-        private void LoadHexCode(List<string> codes)
+        private void LoadHexCode(IReadOnlyList<string> codes)
         {
             int j = 0;
             for (int i = 0; i < codes.Count; i++)
@@ -242,3 +242,6 @@ namespace processor
         }
     }
 }
+
+/*
+*/
