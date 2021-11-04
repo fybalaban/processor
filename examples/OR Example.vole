@@ -1,0 +1,6 @@
+1xAAAA # RAM'in 0xAA adresine AA verisini yerleştirir
+1xBB55 # RAM'in 0xBB adresine 55 verisini yerleştirir
+0x10AA # 0x0 adresindeki register'a RAM'in 0xAA adresindeki verisini yerleştirir
+0x11BB # 0x1 adresindeki register'a RAM'in 0xBB adresindeki verisini yerleştirir
+0x7210 # 0x1 adresindeki register'ın verisi ile 0x0 adresindeki register'ın verisini VEYA işlemine tabi tutar, sonucu 0x2 register'ına yerleştirir
+0xC000 # Çalıştırmayı durdurur
