@@ -141,11 +141,7 @@ Example: 0x40A4 would cause the contents of register
 0xA to be copied into register 0x4.</value>
   </data>
   <data name="0x5En" xml:space="preserve">
-    <value>ADD the bit patterns in registers S and T as though they
-were two’s complement representations and leave the
-result in register R.
-Example: 0x5726 would cause the binary values in reg&#x2;isters 0x2 and 0x6 to be added and the sum placed in
-register 0x7.</value>
+    <value>ADD the bit patterns in registers S and T as though they were two’s complement representations and leave the result in register R. Example: 0x5726 would cause the binary values in registers 0x2 and 0x6 to be added and the sum placed in register 0x7.</value>
   </data>
   <data name="0x6En" xml:space="preserve">
     <value>ADD the bit patterns in registers S and T as though they
